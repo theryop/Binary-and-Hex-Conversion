@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -36,8 +35,10 @@ int main(int argc, char *argv[])
   char bant = 'T';
   int numbant = +bant;
   int remain = numbant % 16;
+  numbant = numbant - remain;
   numbant = numbant / 16;
   string hex = "";
+  string conv = "";
   if (numbant > 9)
   {
 	  switch (numbant){
@@ -49,6 +50,11 @@ int main(int argc, char *argv[])
 		  case 15: hex.append("F"); break;
 	  }
 	  
+  }
+    else
+  {
+      conv = std::to_string(numbant);
+	  hex.append(conv);
   }
   if (remain > 9)
   {
@@ -63,9 +69,11 @@ int main(int argc, char *argv[])
   }
   else
   {
-	  string conv = std::to_string(numbant);
+      conv = std::to_string(remain);
 	  hex.append(conv);
   }
+  
+  cout << hex << endl;
   
   if (istate == ostate)
   {
