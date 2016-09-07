@@ -8,130 +8,131 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-  bool istate = true; // tells program what input and output to look out for (true = binary, false = hex)
-  bool ostate = false;
-  
-  if (argc > 1) //checks if any additional flags have been raised, and if so, appropriately changes the istate or ostate
-  {
-	  int counter = 1;
-	  while (counter < argc)
-	  {
-		  string comptemp = string(argv[counter]);
-		  if (comptemp == "-xin")
-		  {
-			  istate = false;
-		  }
-		  if (comptemp == "-bout")
-		  {
-			  ostate = true;
-		  }
-		  counter++;
-	  }
-  }
+	bool istate = true; // tells program what input and output to look out for (true = binary, false = hex)
+	bool ostate = false;
 
-  string stdin, stdout; //will figure out how to get the file into stdin
-  //getline(cin, stdin);
-  // ofstream outfile;
-  char bant = 'd'; // test for b to h algorithm
-  char bant2 = '6'; // test varibles for h to b algorithm 
-  char bant3 = '4';
+	if (argc > 1) //checks if any additional flags have been raised, and if so, appropriately changes the istate or ostate
+	{
+		int counter = 1;
+		while (counter < argc)
+		{
+			string comptemp = string(argv[counter]);
+			if (comptemp == "-xin")
+			{
+				istate = false;
+			}
+			if (comptemp == "-bout")
+			{
+				ostate = true;
+			}
+			counter++;
+		}
+	}
 
-  
-  cout << hex << endl;
-  
-  if (istate == ostate) // input becomes output
-  {
-	  stdout = stdin;
-  }
-  else if (istate == true) // binary to hex output algorithm
-  {
-	    int numbant = +bant;
-  int remain = numbant % 16;
-  numbant = numbant - remain;
-  numbant = numbant / 16;
-  string hex = "";
-  string conv = "";
-  if (numbant > 9)
-  {
-	  switch (numbant){
-		  case 10: hex.append("a"); break;
-		  case 11: hex.append("b"); break;
-		  case 12: hex.append("c"); break;
-		  case 13: hex.append("d"); break;
-		  case 14: hex.append("e"); break;
-		  case 15: hex.append("f"); break;
-	  }
-	  
-  }
-    else
-  {
-      conv = std::to_string(numbant);
-	  hex.append(conv);
-  }
-  if (remain > 9)
-  {
-	  	  switch (remain){
-			  case 10: hex.append("a"); break;
-			  case 11: hex.append("b"); break;
-			  case 12: hex.append("c"); break;
-			  case 13: hex.append("d"); break;
-			  case 14: hex.append("e"); break;
-			  case 15: hex.append("f"); break;
-		  }
-  }
-  else
-  {
-      conv = std::to_string(remain);
-	  hex.append(conv);
-  }
-  cout << hex << endl;
-  //stdout = hex;
-  }
-  else // hex to binary (CURRENTLY WORKING ON)
-  {
-	  if ((((+bant2 < 57) && (+bant2 > 48))||((+bant2 < 103) && (+bant2 > 96))) && (((+bant2 < 57) && (+bant2 > 48))||((+bant2 < 103) && (+bant2 > 96))))
-	  {
-	      int dec1, dec2, findec;
-	      if (+bant2 > 57)
-	      {
-	         switch (+bant2)
-	          	  	 {
-            			  case 97: dec1 = 60; break;
-            			  case 98: dec1 = 66; break;
-            			  case 99: dec1 = 72; break;
-            			  case 100: dec1 = 78; break;
-            			  case 101: dec1 = 84; break;
-            			  case 102: dec1 = 90; break;
-		              }
-	      }
-	      else
-	      {
-	          dec1 = bant2 + '0';
-	      }
-	      if (+bant3 > 57)
-	      {
-	         switch (+bant3)
-	          	  	 {
-            			  case 97: dec2 = 10; break;
-            			  case 98: dec2 = 11; break;
-            			  case 99: dec2 = 12; break;
-            			  case 100: dec2 = 13; break;
-            			  case 101: dec2 = 14; break;
-            			  case 102: dec2 = 15; break;
-		              }
-	      }
-	      else
-	      {
-	          dec2 = bant3 + '0';
-	      }
-	      findec = dec1 + dec2;
-	      char finchar = findec;
-	  }
-	  else
-	  {
-	      cout << bant2 << " and " << bant3 << " are not hexadecimal inputs" << endl;
-	  }
-  }
-  
-  return 0;
+	//string stdin, stdout; //will figure out how to get the file into stdin
+	//getline(cin, stdin);
+	// ofstream outfile;
+	char bant = 'd'; // test for b to h algorithm
+	char bant2 = '6'; // test varibles for h to b algorithm 
+	char bant3 = '4';
+
+	if (istate == ostate) // input becomes output
+	{
+		//stdout = stdin;
+	}
+	else if (istate == true) // binary to hex output algorithm
+	{
+		int numbant = +bant;
+		int remain = numbant % 16;
+		numbant = numbant - remain;
+		numbant = numbant / 16;
+		string hex = "";
+		string conv = "";
+		if (numbant > 9)
+		{
+			switch (numbant) {
+			case 10: hex.append("a"); break;
+			case 11: hex.append("b"); break;
+			case 12: hex.append("c"); break;
+			case 13: hex.append("d"); break;
+			case 14: hex.append("e"); break;
+			case 15: hex.append("f"); break;
+			}
+
+		}
+		else
+		{
+			conv = std::to_string(numbant);
+			hex.append(conv);
+		}
+		if (remain > 9)
+		{
+			switch (remain) {
+			case 10: hex.append("a"); break;
+			case 11: hex.append("b"); break;
+			case 12: hex.append("c"); break;
+			case 13: hex.append("d"); break;
+			case 14: hex.append("e"); break;
+			case 15: hex.append("f"); break;
+			}
+		}
+		else
+		{
+			conv = std::to_string(remain);
+			hex.append(conv);
+		}
+		cout << hex << endl;
+		//stdout = hex;
+	}
+	else // hex to binary 
+	{
+
+		if ((((+bant2 < 58) && (+bant2 > 47)) || ((+bant2 < 103) && (+bant2 > 96))) && (((+bant2 < 58) && (+bant2 > 47)) || ((+bant2 < 103) && (+bant2 > 96))))
+		{
+			int dec1, dec2, findec;
+			int num2 = bant2 - '0';
+			int num3 = bant3 - '0';
+			if (+bant2 > 58)
+			{
+				switch (num2)
+				{
+				case 97: dec1 = 60; break;
+				case 98: dec1 = 66; break;
+				case 99: dec1 = 72; break;
+				case 100: dec1 = 78; break;
+				case 101: dec1 = 84; break;
+				case 102: dec1 = 90; break;
+				}
+			}
+			else
+			{
+				dec1 = num2 * 16;
+			}
+			if (num3 > 58)
+			{
+				switch (num3)
+				{
+				case 97: dec2 = 10; break;
+				case 98: dec2 = 11; break;
+				case 99: dec2 = 12; break;
+				case 100: dec2 = 13; break;
+				case 101: dec2 = 14; break;
+				case 102: dec2 = 15; break;
+				}
+			}
+			else
+			{
+				dec2 = num3;
+			}
+			findec = dec1 + dec2;
+			char finchar = findec;
+			cout << finchar << endl;
+		}
+		else
+		{
+			cout << bant2 << " and " << bant3 << " are not hexadecimal inputs" << endl;
+		}
+	}
+
+	return 0;
 }
