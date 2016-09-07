@@ -33,14 +33,15 @@ int main(int argc, char *argv[])
 
 	int ui = getchar();
 	counter = 0;
-	string useri = "";
-	string usero = "";
+	vector<char> useri;
+	vector<char> usero;
 	while (ui != EOF) // reads inputstream and fills input string with chosen input
 	{
-		string currentui(1, ui);
-		useri.append(currentui);
+		useri.push_back(ui);
 		ui = getchar();
 	}
+
+
 	counter = 0;
 	while (unsigned(counter) < useri.size()) // changes desired input into desired output
 	{
@@ -49,55 +50,53 @@ int main(int argc, char *argv[])
 
 		if (istate == ostate) // input becomes output if both states are the same
 		{
-			usero = useri;
+			usero.push_back(useri.at(counter));
 		}
 		else if (istate == true) // binary to ASCII output algorithm
 		{
-			int numval = +val;
-			int remain = numval % 16;
-			numval = numval - remain;
-			numval = numval / 16;
+			int numval = +val;  
+			int remain = numval % 16; 
+			numval = numval - remain;  
+			numval = numval / 16;       
 			string hex = "";
 			if (numval > 9)
 			{
-				switch (numval) {
-				case 10: hex.append("a"); break;
-				case 11: hex.append("b"); break;
-				case 12: hex.append("c"); break;
-				case 13: hex.append("d"); break;
-				case 14: hex.append("e"); break;
-				case 15: hex.append("f"); break;
+				switch (numval) 
+				{
+				case 10: usero.push_back('a'); break;
+				case 11: usero.push_back('b'); break;
+				case 12: usero.push_back('c'); break;
+				case 13: usero.push_back('d'); break;
+				case 14: usero.push_back('e'); break;
+				case 15: usero.push_back('f'); break;
 				}
-
 			}
 			else
 			{
-				char itoc = numval;
-				string conval(1,itoc);
-				hex.append(conval);
+				char conv = numval + '0';
+				usero.push_back(conv);
 			}
 			if (remain > 9)
 			{
-				switch (remain) {
-				case 10: hex.append("a"); break;
-				case 11: hex.append("b"); break;
-				case 12: hex.append("c"); break;
-				case 13: hex.append("d"); break;
-				case 14: hex.append("e"); break;
-				case 15: hex.append("f"); break;
+				switch (remain) 
+				{
+				case 10: usero.push_back('a'); break;
+				case 11: usero.push_back('b'); break;
+				case 12: usero.push_back('c'); break;
+				case 13: usero.push_back('d'); break;
+				case 14: usero.push_back('e'); break;
+				case 15: usero.push_back('f'); break;
 				}
 			}
 			else
 			{
-				char itoc = remain;
-				string conval(1,itoc);
-				hex.append(conval);
+				char conv2 = remain + '0';
+				usero.push_back(conv2);
 			}
-			usero.append(hex);
-			usero.append(" ");
+			usero.push_back(' ');
 			if (usero.size() % 48 == 0)
 			{
-				usero.append("\n");
+				usero.push_back('\n');
 			}
 
 			counter++;
@@ -146,9 +145,7 @@ int main(int argc, char *argv[])
 				}
 				findec = dec1 + dec2;
 				char finchar = findec;
-				cout << finchar << endl;
-				string sfin(1, finchar);
-				usero.append(sfin);
+				usero.push_back(finchar);
 				counter = counter + 3;
 			}
 			else
