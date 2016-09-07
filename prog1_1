@@ -8,12 +8,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	bool istate = true; // tells program what input and output to look out for (true = binary, false = hex)
-	bool ostate = false;
-
+	bool istate = false; // tells program what input and output to look out for (true = binary, false = hex)
+	bool ostate = true;
+	int counter = 0;
 	if (argc > 1) //checks if any additional flags have been raised, and if so, appropriately changes the istate or ostate
 	{
-		int counter = 1;
+		counter = 1;
 		while (counter < argc)
 		{
 			string comptemp = string(argv[counter]);
@@ -29,110 +29,122 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	//string stdin, stdout; //will figure out how to get the file into stdin
-	//getline(cin, stdin);
-	// ofstream outfile;
-	char bant = 'd'; // test for b to h algorithm
-	char bant2 = '6'; // test varibles for h to b algorithm 
-	char bant3 = '4';
-
-	if (istate == ostate) // input becomes output
+	//string stdin, stdout; will figure out how to get the file into stdin
+	string useri = "54 68 65 20 44 6f 67 0a";
+	string usero = "";
+	counter = 0;
+	while (counter < useri.size())
 	{
-		//stdout = stdin;
-	}
-	else if (istate == true) // binary to hex output algorithm
-	{
-		int numbant = +bant;
-		int remain = numbant % 16;
-		numbant = numbant - remain;
-		numbant = numbant / 16;
-		string hex = "";
-		string conv = "";
-		if (numbant > 9)
-		{
-			switch (numbant) {
-			case 10: hex.append("a"); break;
-			case 11: hex.append("b"); break;
-			case 12: hex.append("c"); break;
-			case 13: hex.append("d"); break;
-			case 14: hex.append("e"); break;
-			case 15: hex.append("f"); break;
-			}
+		char bant = useri.at(counter); // test for b to h algorithm
+		char bant2 = useri.at(counter); // test varibles for h to b algorithm 
+		char bant3;
 
-		}
-		else
+		if (istate == ostate) // input becomes output
 		{
-			conv = std::to_string(numbant);
-			hex.append(conv);
+			//stdout = stdin;
 		}
-		if (remain > 9)
+		else if (istate == true) // binary to hex output algorithm
 		{
-			switch (remain) {
-			case 10: hex.append("a"); break;
-			case 11: hex.append("b"); break;
-			case 12: hex.append("c"); break;
-			case 13: hex.append("d"); break;
-			case 14: hex.append("e"); break;
-			case 15: hex.append("f"); break;
-			}
-		}
-		else
-		{
-			conv = std::to_string(remain);
-			hex.append(conv);
-		}
-		cout << hex << endl;
-		//stdout = hex;
-	}
-	else // hex to binary 
-	{
-
-		if ((((+bant2 < 58) && (+bant2 > 47)) || ((+bant2 < 103) && (+bant2 > 96))) && (((+bant2 < 58) && (+bant2 > 47)) || ((+bant2 < 103) && (+bant2 > 96))))
-		{
-			int dec1, dec2, findec;
-			int num2 = bant2 - '0';
-			int num3 = bant3 - '0';
-			if (+bant2 > 58)
+			int numbant = +bant;
+			int remain = numbant % 16;
+			numbant = numbant - remain;
+			numbant = numbant / 16;
+			string hex = "";
+			string conv = "";
+			if (numbant > 9)
 			{
-				switch (num2)
-				{
-				case 97: dec1 = 60; break;
-				case 98: dec1 = 66; break;
-				case 99: dec1 = 72; break;
-				case 100: dec1 = 78; break;
-				case 101: dec1 = 84; break;
-				case 102: dec1 = 90; break;
+				switch (numbant) {
+				case 10: hex.append("a"); break;
+				case 11: hex.append("b"); break;
+				case 12: hex.append("c"); break;
+				case 13: hex.append("d"); break;
+				case 14: hex.append("e"); break;
+				case 15: hex.append("f"); break;
+				}
+
+			}
+			else
+			{
+				conv = std::to_string(numbant);
+				hex.append(conv);
+			}
+			if (remain > 9)
+			{
+				switch (remain) {
+				case 10: hex.append("a"); break;
+				case 11: hex.append("b"); break;
+				case 12: hex.append("c"); break;
+				case 13: hex.append("d"); break;
+				case 14: hex.append("e"); break;
+				case 15: hex.append("f"); break;
 				}
 			}
 			else
 			{
-				dec1 = num2 * 16;
+				conv = std::to_string(remain);
+				hex.append(conv);
 			}
-			if (num3 > 58)
+			usero.append(hex);
+			usero.append(" ");
+			counter++;
+		}
+		else // hex to binary 
+		{
+			bant3 = useri.at(counter + 1);
+			cout << "initial bants " << bant2 << " " << bant3 << endl;
+			if ((((+bant2 < 58) && (+bant2 > 47)) || ((+bant2 < 103) && (+bant2 > 96))) && (((+bant2 < 58) && (+bant2 > 47)) || ((+bant2 < 103) && (+bant2 > 96))))
 			{
-				switch (num3)
+				int dec1, dec2, findec;
+				int num2 = +bant2;
+				int num3 = +bant3;
+				if (+bant2 > 58)
 				{
-				case 97: dec2 = 10; break;
-				case 98: dec2 = 11; break;
-				case 99: dec2 = 12; break;
-				case 100: dec2 = 13; break;
-				case 101: dec2 = 14; break;
-				case 102: dec2 = 15; break;
+					switch (num2)
+					{
+					case 97: dec1 = 60; break;
+					case 98: dec1 = 66; break;
+					case 99: dec1 = 72; break;
+					case 100: dec1 = 78; break;
+					case 101: dec1 = 84; break;
+					case 102: dec1 = 90; break;
+					}
 				}
+				else
+				{
+					num2 = bant2 - '0';
+					dec1 = num2 * 16;
+				}
+				if (+bant3 > 58)
+				{
+					switch (num3)
+					{
+					case 97: dec2 = 10; break;
+					case 98: dec2 = 11; break;
+					case 99: dec2 = 12; break;
+					case 100: dec2 = 13; break;
+					case 101: dec2 = 14; break;
+					case 102: dec2 = 15; break;
+					}
+				}
+				else
+				{
+					num3 = bant3 - '0';
+					dec2 = num3;
+				}
+				findec = dec1 + dec2;
+				char finchar = findec;
+				cout << finchar << endl;
+				string sfin(1, finchar);
+				usero.append(sfin);
+				counter = counter + 3;
 			}
 			else
 			{
-				dec2 = num3;
+				cout << bant2 << " is not a hexidecimal input." << endl;
+				exit(1);
 			}
-			findec = dec1 + dec2;
-			char finchar = findec;
-			cout << finchar << endl;
-		}
-		else
-		{
-			cout << bant2 << " and " << bant3 << " are not hexadecimal inputs" << endl;
 		}
 	}
-
+	cout << usero << endl;
 	return 0;
 }
