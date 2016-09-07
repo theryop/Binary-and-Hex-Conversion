@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -40,7 +42,7 @@ int main(int argc, char *argv[])
 		ui = getchar();
 	}
 	counter = 0;
-	while (counter < useri.size()) // changes desired input into desired output
+	while (unsigned(counter) < useri.size()) // changes desired input into desired output
 	{
 		char val = useri.at(counter); 
 		char val2;
@@ -56,7 +58,6 @@ int main(int argc, char *argv[])
 			numval = numval - remain;
 			numval = numval / 16;
 			string hex = "";
-			string conv = "";
 			if (numval > 9)
 			{
 				switch (numval) {
@@ -71,8 +72,9 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				conv = std::to_string(numval);
-				hex.append(conv);
+				char itoc = numval;
+				string conval(1,itoc);
+				hex.append(conval);
 			}
 			if (remain > 9)
 			{
@@ -87,8 +89,9 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				conv = std::to_string(remain);
-				hex.append(conv);
+				char itoc = remain;
+				string conval(1,itoc);
+				hex.append(conval);
 			}
 			usero.append(hex);
 			usero.append(" ");
@@ -156,7 +159,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	counter = 0;
-	while (counter < usero.size()) //returns output string in characters
+	while (unsigned(counter) < usero.size()) //returns output string in characters
 	{
 		putchar(usero.at(counter));
 		counter++;
